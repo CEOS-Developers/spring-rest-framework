@@ -15,7 +15,11 @@ import javax.persistence.Lob;
 @Entity
 public class Post {
 
-    private Post() {
+    private Post() {}
+
+    public Post(String text, Integer likeCount) {
+        this.text = text;
+        this.likesCount = likeCount;
     }
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,9 +34,11 @@ public class Post {
     private Integer likesCount;
 
     @CreatedDate
+    @Column
     private Date createdAt;
 
     @LastModifiedDate
+    @Column
     private Date updatedAt;
 
     public Long getId() {
@@ -53,5 +59,16 @@ public class Post {
 
     public Date getUpdatedAt() {
         return updatedAt;
+    }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id=" + id +
+                ", text='" + text + '\'' +
+                ", likesCount=" + likesCount +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                '}';
     }
 }
